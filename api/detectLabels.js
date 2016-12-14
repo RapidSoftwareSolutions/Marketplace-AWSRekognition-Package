@@ -20,7 +20,7 @@ module.exports = (req, res) => {
         imageS3Version,
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret});
+    let required = lib.parseReq({apiKey, apiSecret, region});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);

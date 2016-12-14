@@ -18,7 +18,7 @@ module.exports = (req, res) => {
         region
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret, collectionId, faceId});
+    let required = lib.parseReq({apiKey, apiSecret, collectionId, faceId, region});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);

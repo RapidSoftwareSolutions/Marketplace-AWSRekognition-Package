@@ -19,7 +19,7 @@ module.exports = (req, res) => {
         region
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret});
+    let required = lib.parseReq({apiKey, apiSecret, region});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
