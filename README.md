@@ -111,7 +111,7 @@ Detects faces in the input image and adds them to the specified collection.
 
 #### `detectionAttributes` example: 
 ```json
-"detectionAttributes":  ["DEFAULT | ALL"]
+"detectionAttributes":  ["DEFAULT", "ALL"]
 ```
 
 ## AWSRekognition.getCollections
