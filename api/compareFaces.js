@@ -68,8 +68,6 @@ module.exports = (req, res) => {
          }
     }, true);
 
-    console.log(params);
-
     client.compareFaces(params, (err, data) => {
         if(err) defered.reject(err); 
         else    defered.resolve(data);  
