@@ -45,6 +45,9 @@ module.exports = (req, res) => {
         region: region
     });
 
+    if(sourceImageBytes && /^(?:[a-z]+:)/.test(sourceImageBytes)) sourceImageBytes = lib.download(sourceImageBytes);
+    if(targetImageBytes && /^(?:[a-z]+:)/.test(targetImageBytes)) targetImageBytes = lib.download(targetImageBytes);
+
     let params = lib.clearArgs({
          SimilarityThreshold: similarityThreshold,
          SourceImage: {
@@ -64,6 +67,8 @@ module.exports = (req, res) => {
             } 
          }
     }, true);
+
+    console.log(params);
 
     client.compareFaces(params, (err, data) => {
         if(err) defered.reject(err); 

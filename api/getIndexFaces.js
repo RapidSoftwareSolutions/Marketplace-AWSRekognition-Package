@@ -40,6 +40,8 @@ module.exports = (req, res) => {
         region: region 
     });
 
+    if(imageBytes && /^(?:[a-z]+:)/.test(imageBytes)) imageBytes = lib.download(imageBytes);
+
     let params = lib.clearArgs({
         CollectionId:        collectionId,
         DetectionAttributes: detectionAttributes,

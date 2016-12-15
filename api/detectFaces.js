@@ -38,6 +38,8 @@ module.exports = (req, res) => {
         throw new RapidError('JSON_VALIDATION');
     }
 
+    if(imageBytes && /^(?:[a-z]+:)/.test(imageBytes)) imageBytes = lib.download(imageBytes);
+
     let params = lib.clearArgs({
         Attributes: attributes,
         Image: {

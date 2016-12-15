@@ -25,6 +25,8 @@ module.exports = (req, res) => {
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
 
+    if(imageBytes && /^(?:[a-z]+:)/.test(imageBytes)) imageBytes = lib.download(imageBytes);
+
     let client  = new AWS.Rekognition({
         credentials: { 
             accessKeyId:     req.body.args['apiKey'], 
