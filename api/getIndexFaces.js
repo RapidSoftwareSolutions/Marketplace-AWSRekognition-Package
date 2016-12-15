@@ -14,7 +14,7 @@ module.exports = (req, res) => {
         collectionId,
         externalImageId,
         detectionAttributes,
-        imageBytes,
+        image,
         imageS3Bucket,
         imageS3Name,
         imageS3Version,
@@ -40,14 +40,14 @@ module.exports = (req, res) => {
         region: region 
     });
 
-    if(imageBytes && /^(?:[a-z]+:)/.test(imageBytes)) imageBytes = lib.download(imageBytes);
+    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
 
     let params = lib.clearArgs({
         CollectionId:        collectionId,
         DetectionAttributes: detectionAttributes,
         ExternalImageId:     externalImageId,
         Image: {
-            Bytes: imageBytes,
+            Bytes: image,
             S3Object: { 
                 Bucket:  imageS3Bucket,
                 Name:    imageS3Name,

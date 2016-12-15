@@ -3,7 +3,7 @@ module.exports.do = function(req, res){
         'package': 'AWSRekognition',
         "tagline": "AWSRekognition API Package",
         "keywords": ["API"],
-        "description": "Notice that images should be uploaded directly.",
+        "description": "Detect objects, scenes, and faces in images",
         'image': 'http:\/\/logo.clearbit.com\/amazon.com',
         'repo': 'https://github.com/RapidSoftwareSolutions/Marketplace-AWSRekognition-Package',
         'accounts': {
@@ -41,9 +41,9 @@ module.exports.do = function(req, res){
                     required: false
                 },
                 {
-                    name: "sourceImageBytes",
-                    type: "Blob",
-                    info: "Base64-encoded binary data",
+                    name: "sourceImage",
+                    type: "File",
+                    info: "File or url",
                     required: false
                 },
                 {
@@ -65,9 +65,9 @@ module.exports.do = function(req, res){
                     required: false
                 },
                 {
-                    name: "targetImageBytes",
-                    type: "Blob",
-                    info: "Base64-encoded binary data",
+                    name: "targetImage",
+                    type: "File",
+                    info: "File or url",
                     required: false
                 },
                 {
@@ -211,13 +211,13 @@ module.exports.do = function(req, res){
                 {
                     name: "attributes",
                     type: "JSON",
-                    info: "JSON Array of strings.",
+                    info: "SON Array of strings. A list of facial attributes you would like to be returned. By default, the API returns subset of facial attributes. Valid values: `ALL`, `DEFAULT`",
                     required: false
                 },
                 {
-                    name: "imageBytes",
-                    type: "Blob",
-                    info: "Base64-encoded binary data",
+                    name: "image",
+                    type: "File",
+                    info: "File or url",
                     required: false
                 },
                 {
@@ -275,9 +275,9 @@ module.exports.do = function(req, res){
                     required: false
                 },
                 {
-                    name: "imageBytes",
-                    type: "Blob",
-                    info: "Base64-encoded binary data",
+                    name: "image",
+                    type: "File",
+                    info: "File or url",
                     required: false
                 },
                 {
@@ -341,9 +341,9 @@ module.exports.do = function(req, res){
                     required: false
                 },
                 {
-                    name: "imageBytes",
-                    type: "Blob",
-                    info: "Base64-encoded binary data",
+                    name: "image",
+                    type: "File",
+                    info: "File or url",
                     required: false
                 },
                 {
@@ -446,7 +446,7 @@ module.exports.do = function(req, res){
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"searchFaces",
-            "description": "",
+            "description": "For a given input face ID, searches the specified collection for matching faces. You get a face ID when you add a face to the collection using the IndexFaces operation. The operation compares the features of the input face with faces in the specified collection.",
             "args":[
                 {
                     name: "apiKey",
@@ -533,9 +533,9 @@ module.exports.do = function(req, res){
                     required: true
                 },
                 {
-                    name: "imageBytes",
-                    type: "Blob",
-                    info: "Base64-encoded binary data",
+                    name: "image",
+                    type: "File",
+                    info: "File or url",
                     required: false
                 },
                 {

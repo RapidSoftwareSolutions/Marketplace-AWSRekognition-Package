@@ -1,5 +1,5 @@
 # AWSRekognition Package
-Notice that images should be uploaded directly.
+Detect objects, scenes, and faces in images
 * Domain: aws.amazon.com
 * Credentials: apiKey, apiSecret
 
@@ -19,11 +19,11 @@ Compares a face in the source input image with each face detected in the target 
 | apiSecret           | credentials| API secret obtained from Amazon.
 | region              | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon).
 | similarityThreshold | Number     | The minimum level of confidence in the match you want included in the result.
-| sourceImageBytes    | File       | File or url.
+| sourceImage         | File       | Image file or url with image.
 | sourceImageS3Bucket | String     | Name of the S3 bucket.
 | sourceImageS3Name   | String     | S3 object key name.
 | sourceImageS3Version| String     | If the bucket is versioning enabled, you can specify the object version.
-| targetImageBytes    | File       | File or url.
+| targetImage         | File       | Image file or url with image.
 | targetImageS3Bucket | String     | Name of the S3 bucket.
 | targetImageS3Name   | String     | S3 object key name.
 | targetImageS3Version| String     | If the bucket is versioning enabled, you can specify the object version.
@@ -35,7 +35,7 @@ Creates a collection in an AWS Region. You can add faces to the collection using
 |-----------------|------------|----------
 | apiKey          | credentials| API key obtained from Amazon.
 | apiSecret       | credentials| API secret obtained from Amazon.
-| region              | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon).
+| region          | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon).
 | collectionId    | String     | ID for the collection that you are creating.
 
 ## AWSRekognition.deleteCollection
@@ -67,15 +67,15 @@ Detects faces within an image (JPEG or PNG) that is provided as input.
 | apiKey        | credentials| API key obtained from Amazon.
 | apiSecret     | credentials| API secret obtained from Amazon.
 | region        | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon).
-| attributes    | JSON       | JSON Array of strings.
-| imageBytes    | File       | File or url.
+| attributes    | JSON       | JSON Array of strings. A list of facial attributes you would like to be returned. By default, the API returns subset of facial attributes. Valid values: `ALL`, `DEFAULT`. For example, you can specify the value as, ["ALL"] or ["DEFAULT"]. If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator to determine which attributes to return (in this case, it is all attributes). If you specify all attributes, Amazon Rekognition performs additional detection.
+| image         | File       | Image file or url with image.
 | imageS3Bucket | String     | Name of the S3 bucket.
 | imageS3Name   | String     | S3 object key name.
 | imageS3Version| String     | If the bucket is versioning enabled, you can specify the object version.
 
 #### `attributes` example: 
 ```json
-"attributes":  ["DEFAULT | ALL"]
+"attributes":  ["DEFAULT", "ALL"]
 ```
 
 ## AWSRekognition.detectLabels
@@ -88,7 +88,7 @@ Detects instances of real-world labels within an image (JPEG or PNG) provided as
 | region        | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon).
 | maxLabels     | Number     | Maximum number of labels you want the service to return in the response. The service returns the specified number of highest confidence labels.
 | minConfidence | Number     | Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with confidence lower than this specified value.
-| imageBytes    | File       | File or url.
+| image         | File       | Image file or url with image.
 | imageS3Bucket | String     | Name of the S3 bucket.
 | imageS3Name   | String     | S3 object key name.
 | imageS3Version| String     | If the bucket is versioning enabled, you can specify the object version.
@@ -104,7 +104,7 @@ Detects faces in the input image and adds them to the specified collection.
 | collectionId       | String     | ID of an existing collection to which you want to add the faces that are detected in the input images.
 | externalImageId    | String     | ID you want to assign to all the faces detected in the image.
 | detectionAttributes| JSON       | JSON Array of Strings. Returns detailed attributes of indexed faces. By default, the operation returns a subset of the facial attributes.
-| imageBytes         | File       | File or url.
+| image              | File       | Image file or url with image.
 | imageS3Bucket      | String     | Name of the S3 bucket.
 | imageS3Name        | String     | S3 object key name.
 | imageS3Version     | String     | If the bucket is versioning enabled, you can specify the object version.
@@ -138,7 +138,7 @@ Returns metadata for faces in the specified collection. This metadata includes i
 | nextToken       | String     | If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of faces.
 
 ## AWSRekognition.searchFaces
-Method description
+For a given input face ID, searches the specified collection for matching faces. You get a face ID when you add a face to the collection using the IndexFaces operation. The operation compares the features of the input face with faces in the specified collection.
 
 | Field             | Type       | Description
 |-------------------|------------|----------
@@ -161,7 +161,7 @@ For a given input image, first detects the largest face in the image, and then s
 | faceMatchThreshold| String     | Specifies the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%.
 | maxFaces          | Number     | Maximum number of faces to return. The operation returns the maximum number of faces with the highest confidence in the match.
 | collectionId      | String     | ID of the collection to search.
-| imageBytes        | File       | File or url.
+| image             | File       | Image file or url with image.
 | imageS3Bucket     | String     | Name of the S3 bucket.
 | imageS3Name       | String     | S3 object key name.
 | imageS3Version    | String     | If the bucket is versioning enabled, you can specify the object version.

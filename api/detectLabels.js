@@ -14,7 +14,7 @@ module.exports = (req, res) => {
         region,
         maxLabels,
         minConfidence,
-        imageBytes,
+        image,
         imageS3Bucket,
         imageS3Name,
         imageS3Version,
@@ -25,7 +25,7 @@ module.exports = (req, res) => {
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
 
-    if(imageBytes && /^(?:[a-z]+:)/.test(imageBytes)) imageBytes = lib.download(imageBytes);
+    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
 
     let client  = new AWS.Rekognition({
         credentials: { 
@@ -39,7 +39,7 @@ module.exports = (req, res) => {
         MaxLabels:     maxLabels,
         MinConfidence: minConfidence,
         Image: {
-            Bytes: imageBytes,
+            Bytes: image,
             S3Object: { 
                 Bucket:  imageS3Bucket,
                 Name:    imageS3Name,

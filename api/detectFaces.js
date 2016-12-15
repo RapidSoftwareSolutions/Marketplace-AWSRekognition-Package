@@ -12,7 +12,7 @@ module.exports = (req, res) => {
         apiKey,
         apiSecret,
         attributes,
-        imageBytes,
+        image,
         imageS3Bucket,
         imageS3Name,
         imageS3Version,
@@ -38,12 +38,12 @@ module.exports = (req, res) => {
         throw new RapidError('JSON_VALIDATION');
     }
 
-    if(imageBytes && /^(?:[a-z]+:)/.test(imageBytes)) imageBytes = lib.download(imageBytes);
+    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
 
     let params = lib.clearArgs({
         Attributes: attributes,
         Image: {
-            Bytes: imageBytes,
+            Bytes: image,
             S3Object: { 
                 Bucket:  imageS3Bucket,
                 Name:    imageS3Name,

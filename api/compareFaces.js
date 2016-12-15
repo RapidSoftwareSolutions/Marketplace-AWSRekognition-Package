@@ -21,12 +21,12 @@ module.exports = (req, res) => {
         apiKey,
         apiSecret,
         similarityThreshold,
-        sourceImageBytes,
+        sourceImage,
         region,
         sourceImageS3Bucket,
         sourceImageS3Name,
         sourceImageS3Version,
-        targetImageBytes,
+        targetImage,
         targetImageS3Bucket,
         targetImageS3Name,
         targetImageS3Version
@@ -45,13 +45,13 @@ module.exports = (req, res) => {
         region: region
     });
 
-    if(sourceImageBytes && /^(?:[a-z]+:)/.test(sourceImageBytes)) sourceImageBytes = lib.download(sourceImageBytes);
-    if(targetImageBytes && /^(?:[a-z]+:)/.test(targetImageBytes)) targetImageBytes = lib.download(targetImageBytes);
+    if(sourceImage && /^(?:[a-z]+:)/.test(sourceImage)) sourceImage = lib.download(sourceImage);
+    if(targetImage && /^(?:[a-z]+:)/.test(targetImage)) targetImage = lib.download(targetImage);
 
     let params = lib.clearArgs({
          SimilarityThreshold: similarityThreshold,
          SourceImage: {
-            Bytes: sourceImageBytes,
+            Bytes: sourceImage,
             S3Object: { 
                 Bucket:  sourceImageS3Bucket,
                 Name:    sourceImageS3Name,
@@ -59,7 +59,7 @@ module.exports = (req, res) => {
             } 
          },
          TargetImage: {
-            Bytes: targetImageBytes,
+            Bytes: targetImage,
             S3Object: { 
                 Bucket:  targetImageS3Bucket,
                 Name:    targetImageS3Name,
