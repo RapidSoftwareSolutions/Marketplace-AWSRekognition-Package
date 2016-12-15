@@ -34,7 +34,7 @@ module.exports = (req, res) => {
 
     client.deleteCollection(params, (err, data) => {
         if(err) defered.reject(err); 
-        else    defered.resolve(data);  
+        else    defered.resolve({status_code: 'SUCCESS', status_msg: 'Collection was deleted.'});  
     });
 
     return defered.promise;
