@@ -27,7 +27,7 @@ module.exports = (req, res) => {
         throw new RapidError('REQUIRED_FIELDS', required);
 
     if(!image && !(imageS3Name || imageS3Bucket))
-        throw new RapidError('REQUIRED_FIELDS_SET', ['image', ['imageS3Bucket', 'imageS3Name']]);
+        throw new RapidError('REQUIRED_FIELDS_SET', [['image'], ['imageS3Bucket', 'imageS3Name']]);
 
     try {
         if(typeof detectionAttributes == 'string') detectionAttributes = JSON.parse(detectionAttributes);

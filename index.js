@@ -6,7 +6,7 @@ global.RapidError = function(code, fields) {
 
     let messages = {
         'REQUIRED_FIELDS':        'Please, check and fill in required fields.',
-        'REQUIRED_FIELDS_SET':     'Please, fill in at least one field sets.',
+        'REQUIRED_FIELDS_SET':    'Please, fill in at least one set of fields',
         'JSON_VALIDATION':        'Syntax error. Incorrect input JSON. Please, check fields with JSON input.',
         'INTERNAL_PACKAGE_ERROR': 'Something went wrong inside the package.'
     }
