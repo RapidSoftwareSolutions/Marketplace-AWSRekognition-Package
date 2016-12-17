@@ -26,7 +26,7 @@ module.exports = (req, res) => {
         throw new RapidError('REQUIRED_FIELDS', required);
 
     if(!image && !(imageS3Name || imageS3Bucket))
-        throw new RapidError('REQUIRED_FIELDS_SET', ['image', ['imageS3Bucket', 'imageS3Name']]);
+        throw new RapidError('REQUIRED_FIELDS_SET', [['image'], ['imageS3Bucket', 'imageS3Name']]);
 
     if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
 
