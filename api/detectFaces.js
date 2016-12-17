@@ -24,6 +24,10 @@ module.exports = (req, res) => {
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
 
+    if(!image || !(imageS3Name || imageS3Bucket))
+        throw new RapidError('REQUIRED_FIELDS_SET', ['image', ['imageS3Bucket', 'imageS3Name']]);
+
+
     let client  = new AWS.Rekognition({
         credentials: { 
             accessKeyId:     req.body.args['apiKey'], 
