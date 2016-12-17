@@ -3,17 +3,19 @@
 global.PACKAGE_NAME = "AWSRekognition";
 
 global.RapidError = function(code, fields) {
+
     let messages = {
         'REQUIRED_FIELDS':        'Please, check and fill in required fields.',
-        'FILE_UPLOAD':            'Please, check file url.',
+        'REQUIRED_FIELDS_SET':     'Please, fill in at least one field sets.',
         'JSON_VALIDATION':        'Syntax error. Incorrect input JSON. Please, check fields with JSON input.',
         'INTERNAL_PACKAGE_ERROR': 'Something went wrong inside the package.'
     }
 
-    this.status_code = code;
+    // ...
+    this.status_code = code == 'REQUIRED_FIELDS_SET' ? 'REQUIRED_FIELDS' : code;
     this.status_msg  = messages[code];
 
-    if(code == 'REQUIRED_FIELDS')
+    if(/REQUIRED/.test(code))
         this.fields  = fields || [];
 }
 
