@@ -37,11 +37,11 @@ module.exports = (req, res) => {
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
 
-    if(!sourceImage || !(sourceImageS3Bucket || sourceImageS3Name))
-        throw new RapidError('REQUIRED_FIELDS_SET', ['sourceImage', ['sourceImageS3Bucket', 'sourceImageS3Name']]);
+    if(!sourceImage && !(sourceImageS3Bucket || sourceImageS3Name))
+        throw new RapidError('REQUIRED_FIELDS_SET', [['sourceImage'], ['sourceImageS3Bucket', 'sourceImageS3Name']]);
 
     if(!targetImage && !(targetImageS3Bucket || targetImageS3Name))
-        throw new RapidError('REQUIRED_FIELDS_SET', ['targetImage', ['targetImageS3Bucket', 'targetImageS3Name']]);
+        throw new RapidError('REQUIRED_FIELDS_SET', [['targetImage'], ['targetImageS3Bucket', 'targetImageS3Name']]);
 
     let client  = new AWS.Rekognition({
         credentials: { 
