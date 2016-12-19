@@ -48,7 +48,7 @@ module.exports = (req, res) => {
     }, true);
 
     client.detectLabels(params, (err, data) => {
-        if(err) defered.reject(err); 
+        if(err) defered.reject(data || err); 
         else    defered.resolve(data);  
     });
 
