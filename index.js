@@ -6,16 +6,14 @@ global.RapidError = function(code, fields) {
 
     let messages = {
         'REQUIRED_FIELDS':        'Please, check and fill in required fields.',
-        'REQUIRED_FIELDS_SET':    'Please, fill in at least one set of fields',
         'JSON_VALIDATION':        'Syntax error. Incorrect input JSON. Please, check fields with JSON input.',
         'INTERNAL_PACKAGE_ERROR': 'Something went wrong inside the package.'
     }
 
-    // ...
-    this.status_code = code == 'REQUIRED_FIELDS_SET' ? 'REQUIRED_FIELDS' : code;
+    this.status_code = code;
     this.status_msg  = messages[code];
 
-    if(/REQUIRED/.test(code))
+    if(code == 'REQUIRED_FIELDS')
         this.fields  = fields || [];
 }
 

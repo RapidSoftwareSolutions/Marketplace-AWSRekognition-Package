@@ -21,12 +21,16 @@ module.exports = (req, res) => {
         apiKey,
         apiSecret,
         similarityThreshold,
-        sourceImage,
         region='us-east-1',
-        targetImage
+        sourceImageS3Bucket,
+        sourceImageS3Name,
+        sourceImageS3Version,
+        targetImageS3Bucket,
+        targetImageS3Name,
+        targetImageS3Version
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret, region, sourceImage, targetImage});
+    let required = lib.parseReq({apiKey, apiSecret, region, sourceImageS3Name, sourceImageS3Bucket, targetImageS3Name, targetImageS3Bucket});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
@@ -39,16 +43,26 @@ module.exports = (req, res) => {
         region: region
     });
 
-    if(sourceImage && /^(?:[a-z]+:)/.test(sourceImage)) sourceImage = lib.download(sourceImage);
-    if(targetImage && /^(?:[a-z]+:)/.test(targetImage)) targetImage = lib.download(targetImage);
+    //if(sourceImage && /^(?:[a-z]+:)/.test(sourceImage)) sourceImage = lib.download(sourceImage);
+    //if(targetImage && /^(?:[a-z]+:)/.test(targetImage)) targetImage = lib.download(targetImage);
 
     let params = lib.clearArgs({
          SimilarityThreshold: similarityThreshold,
          SourceImage: {
-            Bytes: sourceImage
+            //Bytes: sourceImage,
+            S3Object: { 
+                Bucket:  sourceImageS3Bucket,
+                Name:    sourceImageS3Name,
+                Version: sourceImageS3Version
+            } 
          },
          TargetImage: {
-            Bytes: targetImage 
+            //Bytes: targetImage,
+            S3Object: { 
+                Bucket:  targetImageS3Bucket,
+                Name:    targetImageS3Name,
+                Version: targetImageS3Version
+            } 
          }
     }, true);
 

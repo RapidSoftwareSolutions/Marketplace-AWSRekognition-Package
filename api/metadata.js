@@ -44,19 +44,55 @@ module.exports.do = function(req, res){
                     name: "sourceImage",
                     type: "File",
                     info: "File or url",
+                    required: true
+                },
+                {
+                    name: "targetImage",
+                    type: "File",
+                    info: "File or url",
+                    required: true
+                }
+            ], 
+            'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
+        }, {
+            "name":"compareFacesInS3Images",
+            "description": "Compares a face in the source input image with each face detected in the target input image.",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "API key obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "apiSecret",
+                    type: "credentials",
+                    info: "API secret obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "region",
+                    type: "String",
+                    info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
+                    required: false
+                },
+                {
+                    name: "similarityThreshold",
+                    type: "Number",
+                    info: "The minimum level of confidence in the match you want included in the result.",
                     required: false
                 },
                 {
                     name: "sourceImageS3Bucket",
                     type: "String",
                     info: "Name of the S3 bucket.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "sourceImageS3Name",
                     type: "String",
                     info: "S3 object key name.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "sourceImageS3Version",
@@ -65,22 +101,16 @@ module.exports.do = function(req, res){
                     required: false
                 },
                 {
-                    name: "targetImage",
-                    type: "File",
-                    info: "File or url",
-                    required: false
-                },
-                {
                     name: "targetImageS3Bucket",
                     type: "String",
                     info: "Name of the S3 bucket.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "targetImageS3Name",
                     type: "String",
                     info: "S3 object key name.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "targetImageS3Version",
@@ -218,19 +248,49 @@ module.exports.do = function(req, res){
                     name: "image",
                     type: "File",
                     info: "File or url",
+                    required: true
+                }
+            ], 
+            'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
+        }, {
+            "name":"detectFacesInS3Image",
+            "description": "Detects faces within an image (JPEG or PNG) that is provided as input.",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "API key obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "apiSecret",
+                    type: "credentials",
+                    info: "API secret obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "region",
+                    type: "String",
+                    info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
+                    required: false
+                },
+                {
+                    name: "attributes",
+                    type: "JSON",
+                    info: "SON Array of strings. A list of facial attributes you would like to be returned. By default, the API returns subset of facial attributes. Valid values: `ALL`, `DEFAULT`",
                     required: false
                 },
                 {
                     name: "imageS3Bucket",
                     type: "String",
                     info: "Name of the S3 bucket.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "imageS3Name",
                     type: "String",
                     info: "S3 object key name.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "imageS3Version",
@@ -278,19 +338,55 @@ module.exports.do = function(req, res){
                     name: "image",
                     type: "File",
                     info: "File or url",
+                    required: true
+                }
+            ], 
+            'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
+        }, {
+            "name":"detectLabelsInS3Image",
+            "description": "Detects instances of real-world labels within an image (JPEG or PNG) provided as input.",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "API key obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "apiSecret",
+                    type: "credentials",
+                    info: "API secret obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "region",
+                    type: "String",
+                    info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
+                    required: false
+                },
+                {
+                    name: "maxLabels",
+                    type: "Number",
+                    info: "Maximum number of labels you want the service to return in the response. The service returns the specified number of highest confidence labels.",
+                    required: false
+                },
+                {
+                    name: "minConfidence",
+                    type: "Number",
+                    info: "Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with confidence lower than this specified value.",
                     required: false
                 },
                 {
                     name: "imageS3Bucket",
                     type: "String",
                     info: "Name of the S3 bucket.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "imageS3Name",
                     type: "String",
                     info: "S3 object key name.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "imageS3Version",
@@ -344,19 +440,61 @@ module.exports.do = function(req, res){
                     name: "image",
                     type: "File",
                     info: "File or url",
+                    required: true
+                }
+            ], 
+            'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
+        }, {
+            "name":"indexS3FacesIntoCollection",
+            "description": "Detects faces in the input image and adds them to the specified collection.",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "API key obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "apiSecret",
+                    type: "credentials",
+                    info: "API secret obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "region",
+                    type: "String",
+                    info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
+                    required: false
+                },
+                {
+                    name: "collectionId",
+                    type: "String",
+                    info: "ID of an existing collection to which you want to add the faces that are detected in the input images.",
+                    required: true
+                },
+                {
+                    name: "externalImageId",
+                    type: "String",
+                    info: "ID you want to assign to all the faces detected in the image.",
+                    required: false
+                },
+                {
+                    name: "detectionAttributes",
+                    type: "JSON",
+                    info: "JSON Array of Strings. Returns detailed attributes of indexed faces. By default, the operation returns a subset of the facial attributes.",
                     required: false
                 },
                 {
                     name: "imageS3Bucket",
                     type: "String",
                     info: "Name of the S3 bucket.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "imageS3Name",
                     type: "String",
                     info: "S3 object key name.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "imageS3Version",
@@ -536,19 +674,61 @@ module.exports.do = function(req, res){
                     name: "image",
                     type: "File",
                     info: "File or url",
+                    required: true
+                }
+            ], 
+            'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
+        }, {
+            "name":"searchFacesByS3Image",
+            "description": "For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection.",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "API key obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "apiSecret",
+                    type: "credentials",
+                    info: "API secret obtained from Amazon",
+                    required: true
+                },
+                {
+                    name: "region",
+                    type: "String",
+                    info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
+                },
+                {
+                    name: "faceMatchThreshold",
+                    type: "String",
+                    info: "Specifies the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%.",
+                    required: false
+                },
+                {
+                    name: "maxFaces",
+                    type: "Number",
+                    info: "Maximum number of faces to return. The operation returns the maximum number of faces with the highest confidence in the match.",
+                    required: false
+                },
+                {
+                    name: "collectionId",
+                    type: "String",
+                    info: "ID of the collection to search.",
+                    required: true
                 },
                 {
                     name: "imageS3Bucket",
                     type: "String",
                     info: "Name of the S3 bucket.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "imageS3Name",
                     type: "String",
                     info: "S3 object key name.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "imageS3Version",

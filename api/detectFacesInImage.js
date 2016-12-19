@@ -13,20 +13,13 @@ module.exports = (req, res) => {
         apiSecret,
         attributes,
         image,
-        imageS3Bucket,
-        imageS3Name,
-        imageS3Version,
         region='us-east-1'
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret, region});
+    let required = lib.parseReq({apiKey, apiSecret, region, image});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
-
-    if(!image && !(imageS3Name || imageS3Bucket))
-        throw new RapidError('REQUIRED_FIELDS_SET', [['image'], ['imageS3Bucket', 'imageS3Name']]);
-
 
     let client  = new AWS.Rekognition({
         credentials: { 
@@ -48,11 +41,11 @@ module.exports = (req, res) => {
         Attributes: attributes,
         Image: {
             Bytes: image,
-            S3Object: { 
+            /*S3Object: { 
                 Bucket:  imageS3Bucket,
                 Name:    imageS3Name,
                 Version: imageS3Version
-            } 
+            } */
          }
     }, true);
 

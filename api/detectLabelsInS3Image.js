@@ -14,10 +14,12 @@ module.exports = (req, res) => {
         region='us-east-1',
         maxLabels,
         minConfidence,
-        image
+        imageS3Bucket,
+        imageS3Name,
+        imageS3Version,
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret, region, image});
+    let required = lib.parseReq({apiKey, apiSecret, region, imageS3Bucket, imageS3Name});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
@@ -36,12 +38,12 @@ module.exports = (req, res) => {
         MaxLabels:     maxLabels,
         MinConfidence: minConfidence,
         Image: {
-            Bytes: image,
-            /*S3Object: { 
+            // Bytes: image,
+            S3Object: { 
                 Bucket:  imageS3Bucket,
                 Name:    imageS3Name,
                 Version: imageS3Version
-            }*/
+            } 
          }
     }, true);
 

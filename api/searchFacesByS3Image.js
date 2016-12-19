@@ -12,13 +12,15 @@ module.exports = (req, res) => {
         apiKey,
         apiSecret,
         collectionId,
-        externalImageId,
-        detectionAttributes,
-        image,
+        faceMatchThreshold,
+        maxFaces,
+        imageS3Bucket,
+        imageS3Name,
+        imageS3Version,
         region='us-east-1'
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret, collectionId, region, image});
+    let required = lib.parseReq({apiKey, apiSecret, collectionId, region, imageS3Name, imageS3Bucket});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
@@ -29,6 +31,22 @@ module.exports = (req, res) => {
         throw new RapidError('JSON_VALIDATION');
     }
 
+    // if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
+
+    let params = lib.clearArgs({
+        CollectionId:       collectionId,
+        FaceMatchThreshold: faceMatchThreshold,
+        MaxFaces:           maxFaces,
+        Image: {
+            // Bytes: image,
+            S3Object: { 
+                Bucket:  imageS3Bucket,
+                Name:    imageS3Name,
+                Version: imageS3Version
+            } 
+         }
+    }, true);
+
     let client = new AWS.Rekognition({
         credentials: { 
             accessKeyId:     req.body.args['apiKey'], 
@@ -37,23 +55,7 @@ module.exports = (req, res) => {
         region: region 
     });
 
-    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
-
-    let params = lib.clearArgs({
-        CollectionId:        collectionId,
-        DetectionAttributes: detectionAttributes,
-        ExternalImageId:     externalImageId,
-        Image: {
-            Bytes: image,
-            /*S3Object: { 
-                Bucket:  imageS3Bucket,
-                Name:    imageS3Name,
-                Version: imageS3Version
-            }*/
-         }
-    }, true);
-
-    client.indexFaces(params, (err, data) => {
+    client.searchFacesByImage(params, (err, data) => {
         if(err) defered.reject(err); 
         else    defered.resolve(data);  
     });

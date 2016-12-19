@@ -15,19 +15,13 @@ module.exports = (req, res) => {
         faceMatchThreshold,
         maxFaces,
         image,
-        imageS3Bucket,
-        imageS3Name,
-        imageS3Version,
         region='us-east-1'
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret, collectionId, region});
+    let required = lib.parseReq({apiKey, apiSecret, collectionId, region, image});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
-
-    if(!image && !(imageS3Name || imageS3Bucket))
-        throw new RapidError('REQUIRED_FIELDS_SET', [['image'], ['imageS3Bucket', 'imageS3Name']]);
 
     try {
         if(typeof detectionAttributes == 'string') detectionAttributes = JSON.parse(detectionAttributes);
@@ -43,11 +37,11 @@ module.exports = (req, res) => {
         MaxFaces:           maxFaces,
         Image: {
             Bytes: image,
-            S3Object: { 
+            /*S3Object: { 
                 Bucket:  imageS3Bucket,
                 Name:    imageS3Name,
                 Version: imageS3Version
-            } 
+            }*/
          }
     }, true);
 
