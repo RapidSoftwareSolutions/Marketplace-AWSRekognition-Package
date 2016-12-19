@@ -11,13 +11,12 @@ module.exports = (req, res) => {
     let { 
         apiKey,
         apiSecret,
-        region,
-        maxLabels,
-        minConfidence,
+        attributes,
         image,
         imageS3Bucket,
         imageS3Name,
         imageS3Version,
+        region='us-east-1'
     } = req.body.args;
         
     let required = lib.parseReq({apiKey, apiSecret, region});
@@ -28,7 +27,6 @@ module.exports = (req, res) => {
     if(!image && !(imageS3Name || imageS3Bucket))
         throw new RapidError('REQUIRED_FIELDS_SET', [['image'], ['imageS3Bucket', 'imageS3Name']]);
 
-    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
 
     let client  = new AWS.Rekognition({
         credentials: { 
@@ -37,10 +35,17 @@ module.exports = (req, res) => {
         },
         region: region
     });
-    
+
+    try {
+        if(typeof attributes == 'string') attributes = JSON.parse(attributes);
+    } catch(e) {
+        throw new RapidError('JSON_VALIDATION');
+    }
+
+    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
+
     let params = lib.clearArgs({
-        MaxLabels:     maxLabels,
-        MinConfidence: minConfidence,
+        Attributes: attributes,
         Image: {
             Bytes: image,
             S3Object: { 
@@ -51,7 +56,7 @@ module.exports = (req, res) => {
          }
     }, true);
 
-    client.detectLabels(params, (err, data) => {
+    client.detectFaces(params, (err, data) => {
         if(err) defered.reject(err); 
         else    defered.resolve(data);  
     });

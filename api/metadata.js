@@ -13,7 +13,7 @@ module.exports.do = function(req, res){
             ]
         },
         'blocks': [{
-            "name":"compareFaces",
+            "name":"compareFacesInImages",
             "description": "Compares a face in the source input image with each face detected in the target input image.",
             "args":[
                 {
@@ -32,7 +32,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "similarityThreshold",
@@ -110,7 +110,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "collectionId",
@@ -140,7 +140,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "collectionId",
@@ -151,7 +151,7 @@ module.exports.do = function(req, res){
             ], 
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
-            "name":"deleteFaces",
+            "name":"deleteFacesFromCollection",
             "description": "Deletes faces from a collection. You specify a collection ID and an array of face IDs to remove from the collection.",
             "args":[
                 {
@@ -170,7 +170,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "collectionId",
@@ -187,7 +187,7 @@ module.exports.do = function(req, res){
             ], 
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
-            "name":"detectFaces",
+            "name":"detectFacesInImage",
             "description": "Detects faces within an image (JPEG or PNG) that is provided as input.",
             "args":[
                 {
@@ -206,7 +206,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "attributes",
@@ -241,7 +241,7 @@ module.exports.do = function(req, res){
             ], 
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
-            "name":"detectLabels",
+            "name":"detectLabelsInImage",
             "description": "Detects instances of real-world labels within an image (JPEG or PNG) provided as input.",
             "args":[
                 {
@@ -260,7 +260,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "maxLabels",
@@ -301,7 +301,7 @@ module.exports.do = function(req, res){
             ], 
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
-            "name":"getIndexFaces",
+            "name":"indexFacesIntoCollection",
             "description": "Detects faces in the input image and adds them to the specified collection.",
             "args":[
                 {
@@ -320,7 +320,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "collectionId",
@@ -386,7 +386,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "maxResults",
@@ -403,7 +403,7 @@ module.exports.do = function(req, res){
             ], 
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
-            "name":"getFaces",
+            "name":"getFacesInCollection",
             "description": "Returns metadata for faces in the specified collection. This metadata includes information such as the bounding box coordinates, the confidence (that the bounding box contains a face), and face ID.",
             "args":[
                 {
@@ -422,7 +422,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "collectionId",
@@ -464,7 +464,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "collectionId",
@@ -512,7 +512,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: true
+                    required: false
                 },
                 {
                     name: "faceMatchThreshold",

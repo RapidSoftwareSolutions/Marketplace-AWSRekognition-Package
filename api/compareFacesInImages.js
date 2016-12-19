@@ -22,7 +22,7 @@ module.exports = (req, res) => {
         apiSecret,
         similarityThreshold,
         sourceImage,
-        region,
+        region='us-east-1',
         sourceImageS3Bucket,
         sourceImageS3Name,
         sourceImageS3Version,

@@ -18,7 +18,7 @@ module.exports = (req, res) => {
         imageS3Bucket,
         imageS3Name,
         imageS3Version,
-        region
+        region='us-east-1'
     } = req.body.args;
         
     let required = lib.parseReq({apiKey, apiSecret, collectionId, region});

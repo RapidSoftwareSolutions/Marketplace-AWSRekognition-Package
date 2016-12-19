@@ -11,7 +11,7 @@ module.exports = (req, res) => {
     let { 
         apiKey,
         apiSecret,
-        region,
+        region='us-east-1',
         collectionId
     } = req.body.args;
         

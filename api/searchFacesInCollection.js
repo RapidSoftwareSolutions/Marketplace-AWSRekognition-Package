@@ -15,7 +15,7 @@ module.exports = (req, res) => {
         faceId,
         faceMatchThreshold,
         maxFaces,
-        region
+        region='us-east-1'
     } = req.body.args;
         
     let required = lib.parseReq({apiKey, apiSecret, collectionId, faceId, region});

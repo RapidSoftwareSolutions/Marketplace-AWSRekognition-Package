@@ -11,45 +11,36 @@ module.exports = (req, res) => {
     let { 
         apiKey,
         apiSecret,
-        collectionId,
-        externalImageId,
-        detectionAttributes,
+        region='us-east-1',
+        maxLabels,
+        minConfidence,
         image,
         imageS3Bucket,
         imageS3Name,
         imageS3Version,
-        region
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret, collectionId, region});
+    let required = lib.parseReq({apiKey, apiSecret, region});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
 
-    if(!image && !(imageS3Name || imageS3Bucket)) {
+    if(!image && !(imageS3Name || imageS3Bucket))
         throw new RapidError('REQUIRED_FIELDS_SET', [['image'], ['imageS3Bucket', 'imageS3Name']]);
-    }
 
-    try {
-        if(typeof detectionAttributes == 'string') detectionAttributes = JSON.parse(detectionAttributes);
-    } catch(e) {
-        throw new RapidError('JSON_VALIDATION');
-    }
+    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
 
-    let client = new AWS.Rekognition({
+    let client  = new AWS.Rekognition({
         credentials: { 
             accessKeyId:     req.body.args['apiKey'], 
             secretAccessKey: req.body.args['apiSecret']
         },
-        region: region 
+        region: region
     });
-
-    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
-
+    
     let params = lib.clearArgs({
-        CollectionId:        collectionId,
-        DetectionAttributes: detectionAttributes,
-        ExternalImageId:     externalImageId,
+        MaxLabels:     maxLabels,
+        MinConfidence: minConfidence,
         Image: {
             Bytes: image,
             S3Object: { 
@@ -60,7 +51,7 @@ module.exports = (req, res) => {
          }
     }, true);
 
-    client.indexFaces(params, (err, data) => {
+    client.detectLabels(params, (err, data) => {
         if(err) defered.reject(err); 
         else    defered.resolve(data);  
     });

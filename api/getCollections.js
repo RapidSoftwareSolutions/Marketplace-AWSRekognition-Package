@@ -13,7 +13,7 @@ module.exports = (req, res) => {
         apiSecret,
         maxResults,
         nextToken,
-        region
+        region='us-east-1'
     } = req.body.args;
         
     let required = lib.parseReq({apiKey, apiSecret, region});

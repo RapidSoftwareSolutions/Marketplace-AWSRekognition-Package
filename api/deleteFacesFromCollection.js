@@ -12,31 +12,35 @@ module.exports = (req, res) => {
         apiKey,
         apiSecret,
         collectionId,
-        maxResults,
-        nextToken,
-        region
+        faceIds,
+        region='us-east-1'
     } = req.body.args;
         
-    let required = lib.parseReq({apiKey, apiSecret, collectionId, region});
+    let required = lib.parseReq({apiKey, apiSecret, collectionId, faceIds, region});
 
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
 
-    let client  = new AWS.Rekognition({
+    try {
+        if(typeof faceIds == 'string') faceIds = JSON.parse(faceIds);
+    } catch(e) {
+        throw new RapidError('JSON_VALIDATION');
+    }
+
+    let client = new AWS.Rekognition({
         credentials: { 
             accessKeyId:     req.body.args['apiKey'], 
             secretAccessKey: req.body.args['apiSecret']
         },
-        region: region 
+        region: region
     });
 
     let params = lib.clearArgs({
         CollectionId: collectionId,
-        MaxResults:   maxResults,
-        NextToken:    nextToken
-    }, true);
+        FaceIds:      faceIds
+    });
 
-    client.listFaces(params, (err, data) => {
+    client.deleteFaces(params, (err, data) => {
         if(err) defered.reject(err); 
         else    defered.resolve(data);  
     });
