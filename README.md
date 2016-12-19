@@ -7,7 +7,8 @@ Detect objects, scenes, and faces in images
 **Step 1:** Create a new access key, which includes a new secret access key.
 + To create a new secret access key for your root account, use the security credentials page. Expand the Access Keys section, and then click **Create New Root Key**.
 + To create a new secret access key for an IAM user, open the IAM console. Click Users in the Details pane, click the appropriate IAM user, and then click **Create Access Key** on the **Security Credentials** tab.
->Note: If you already have the maximum of two access keys—active or inactive—you must delete one first before proceeding. If you need more than two root access keys, IAM users (each of whom can be assigned their own access keys) would probably better suit your requirements.
+
+> Note: If you already have the maximum of two access keys—active or inactive—you must delete one first before proceeding. If you need more than two root access keys, IAM users (each of whom can be assigned their own access keys) would probably better suit your requirements.
 
 **Step 2**: Enable AWS Rekognation permissions to your user.
 + Click on the **Permissions** tab, then on **Add permissions** button
