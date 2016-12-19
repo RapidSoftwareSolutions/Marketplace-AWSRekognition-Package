@@ -24,7 +24,7 @@ module.exports = (req, res) => {
     if(required.length > 0) 
         throw new RapidError('REQUIRED_FIELDS', required);
 
-    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
+    //if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
 
     let client  = new AWS.Rekognition({
         credentials: { 

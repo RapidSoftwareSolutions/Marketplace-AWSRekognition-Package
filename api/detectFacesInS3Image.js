@@ -37,7 +37,7 @@ module.exports = (req, res) => {
         throw new RapidError('JSON_VALIDATION');
     }
 
-    if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
+    // if(image && /^(?:[a-z]+:)/.test(image)) image = lib.download(image);
 
     let params = lib.clearArgs({
         Attributes: attributes,
