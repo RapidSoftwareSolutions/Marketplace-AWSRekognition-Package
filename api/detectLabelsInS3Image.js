@@ -11,7 +11,7 @@ module.exports = (req, res) => {
     let { 
         apiKey,
         apiSecret,
-        region='us-east-1',
+        region,
         maxLabels,
         minConfidence,
         imageS3Bucket,

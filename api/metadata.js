@@ -74,7 +74,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: false
+                    required: true
                 },
                 {
                     name: "similarityThreshold",
@@ -272,7 +272,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: false
+                    required: true
                 },
                 {
                     name: "attributes",
@@ -362,7 +362,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: false
+                    required: true
                 },
                 {
                     name: "maxLabels",
@@ -464,7 +464,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: false
+                    required: true
                 },
                 {
                     name: "collectionId",
@@ -698,7 +698,7 @@ module.exports.do = function(req, res){
                     name: "region",
                     type: "String",
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
-                    required: false
+                    required: true
                 },
                 {
                     name: "faceMatchThreshold",
