@@ -1,3 +1,5 @@
+[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/AWSRekognition/functions?utm_source=RapidAPIGitHub_AWSRekognitionFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
+
 # AWSRekognition Package
 Detect objects, scenes, and faces in images
 * Domain: aws.amazon.com
