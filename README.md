@@ -17,6 +17,17 @@ Detect objects, scenes, and faces in images
 + Click **Create group** button,. fill in `Group name` field and select *AmazonRekognitionFullAccess* in the pop-up and press *Create group* button.
 + After all, click on **Next: Review** button and on **Add permissions** on Review page.
 
+## Custom datatypes:
+ |Datatype|Description|Example
+ |--------|-----------|----------
+ |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
+ |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
+ |List|Simple array|```["123", "sample"]```
+ |Select|String with predefined values|```sample```
+ |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+
+
+
 ## AWSRekognition.compareFacesInImages
 Compares a face in the source input image with each face detected in the target input image.
 
@@ -24,7 +35,7 @@ Compares a face in the source input image with each face detected in the target 
 |--------------------|------------|----------
 | apiKey             | credentials| API key obtained from Amazon
 | apiSecret          | credentials| API secret obtained from Amazon
-| region             | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region             | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | similarityThreshold| Number     | The minimum level of confidence in the match you want included in the result.
 | sourceImage        | File       | File or url
 | targetImage        | File       | File or url
@@ -36,7 +47,7 @@ Compares a face in the source input image with each face detected in the target 
 |---------------------|------------|----------
 | apiKey              | credentials| API key obtained from Amazon
 | apiSecret           | credentials| API secret obtained from Amazon
-| region              | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region              | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | similarityThreshold | Number     | The minimum level of confidence in the match you want included in the result.
 | sourceImageS3Bucket | String     | Name of the S3 bucket.
 | sourceImageS3Name   | String     | S3 object key name.
@@ -52,7 +63,7 @@ Creates a collection in an AWS Region. You can add faces to the collection using
 |-----------------|------------|----------
 | apiKey          | credentials| API key obtained from Amazon
 | apiSecret       | credentials| API secret obtained from Amazon
-| region          | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region          | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | collectionId    | String     | ID for the collection that you are creating.
 
 ## AWSRekognition.deleteCollection
@@ -62,7 +73,7 @@ Deletes the specified collection. Note that this operation removes all faces in 
 |-------------|------------|----------
 | apiKey      | credentials| API key obtained from Amazon
 | apiSecret   | credentials| API secret obtained from Amazon
-| region      | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region      | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | collectionId| String     | ID for the collection that you are deleting.
 
 ## AWSRekognition.deleteFacesFromCollection
@@ -72,9 +83,9 @@ Deletes faces from a collection. You specify a collection ID and an array of fac
 |-----------------|------------|----------
 | apiKey          | credentials| API key obtained from Amazon
 | apiSecret       | credentials| API secret obtained from Amazon
-| region          | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region          | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | collectionId    | String     | Collection from which to remove the specific faces.
-| faceIds         | String     | An array of face IDs to delete.
+| faceIds         | List     | An array of face IDs to delete.
 
 ## AWSRekognition.detectFacesInImage
 Detects faces within an image (JPEG or PNG) that is provided as input.
@@ -83,7 +94,7 @@ Detects faces within an image (JPEG or PNG) that is provided as input.
 |-----------|------------|----------
 | apiKey    | credentials| API key obtained from Amazon
 | apiSecret | credentials| API secret obtained from Amazon
-| region    | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region    | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | attributes| JSON       | SON Array of strings. A list of facial attributes you would like to be returned. By default, the API returns subset of facial attributes. Valid values: `ALL`, `DEFAULT`
 | image     | File       | File or url
 
@@ -94,7 +105,7 @@ Detects faces within an image (JPEG or PNG) that is provided as input.
 |------------------|------------|----------
 | apiKey           | credentials| API key obtained from Amazon
 | apiSecret        | credentials| API secret obtained from Amazon
-| region           | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region           | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | attributes       | JSON       | SON Array of strings. A list of facial attributes you would like to be returned. By default, the API returns subset of facial attributes. Valid values: `ALL`, `DEFAULT`
 | imageS3Bucket    | String     | Name of the S3 bucket.
 | imageS3Name      | String     | S3 object key name.
@@ -107,7 +118,7 @@ Detects instances of real-world labels within an image (JPEG or PNG) provided as
 |--------------|------------|----------
 | apiKey       | credentials| API key obtained from Amazon
 | apiSecret    | credentials| API secret obtained from Amazon
-| region       | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region       | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | maxLabels    | Number     | Maximum number of labels you want the service to return in the response. The service returns the specified number of highest confidence labels.
 | minConfidence| Number     | Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with confidence lower than this specified value.
 | image        | File       | File or url
@@ -119,7 +130,7 @@ Detects instances of real-world labels within an image (JPEG or PNG) provided as
 |---------------|------------|----------
 | apiKey        | credentials| API key obtained from Amazon
 | apiSecret     | credentials| API secret obtained from Amazon
-| region        | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region        | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | maxLabels     | Number     | Maximum number of labels you want the service to return in the response. The service returns the specified number of highest confidence labels.
 | minConfidence | Number     | Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with confidence lower than this specified value.
 | imageS3Bucket | String     | Name of the S3 bucket.
@@ -133,7 +144,7 @@ Detects faces in the input image and adds them to the specified collection.
 |--------------------|------------|----------
 | apiKey             | credentials| API key obtained from Amazon
 | apiSecret          | credentials| API secret obtained from Amazon
-| region             | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region             | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | collectionId       | String     | ID of an existing collection to which you want to add the faces that are detected in the input images.
 | externalImageId    | String     | ID you want to assign to all the faces detected in the image.
 | detectionAttributes| JSON       | JSON Array of Strings. Returns detailed attributes of indexed faces. By default, the operation returns a subset of the facial attributes.
@@ -146,7 +157,7 @@ Detects faces in the input image and adds them to the specified collection.
 |--------------------|------------|----------
 | apiKey             | credentials| API key obtained from Amazon
 | apiSecret          | credentials| API secret obtained from Amazon
-| region             | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region             | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | collectionId       | String     | ID of an existing collection to which you want to add the faces that are detected in the input images.
 | externalImageId    | String     | ID you want to assign to all the faces detected in the image.
 | detectionAttributes| JSON       | JSON Array of Strings. Returns detailed attributes of indexed faces. By default, the operation returns a subset of the facial attributes.
@@ -161,7 +172,7 @@ Returns list of collection IDs in your account. If the result is truncated, the 
 |-----------|------------|----------
 | apiKey    | credentials| API key obtained from Amazon
 | apiSecret | credentials| API secret obtained from Amazon
-| region    | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region    | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | maxResults| String     | Maximum number of collection IDs to return.
 | nextToken | String     | Pagination token from the previous response.
 
@@ -172,7 +183,7 @@ Returns metadata for faces in the specified collection. This metadata includes i
 |-----------------|------------|----------
 | apiKey          | credentials| API key obtained from Amazon
 | apiSecret       | credentials| API secret obtained from Amazon
-| region          | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region          | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | collectionId    | String     | ID of the collection from which to list the faces.
 | maxResults      | String     | Maximum number of faces to return.
 | nextToken       | String     | If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of faces.
@@ -184,7 +195,7 @@ For a given input face ID, searches the specified collection for matching faces.
 |-------------------|------------|----------
 | apiKey            | credentials| API key obtained from Amazon
 | apiSecret         | credentials| API secret obtained from Amazon
-| region            | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region            | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | collectionId      | String     | ID of the collection to search.
 | faceId            | String     | ID of a face to find matches for in the collection.
 | faceMatchThreshold| String     | Optional value specifying the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%.
@@ -197,7 +208,7 @@ For a given input image, first detects the largest face in the image, and then s
 |-------------------|------------|----------
 | apiKey            | credentials| API key obtained from Amazon
 | apiSecret         | credentials| API secret obtained from Amazon
-| region            | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region            | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | faceMatchThreshold| String     | Specifies the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%.
 | maxFaces          | Number     | Maximum number of faces to return. The operation returns the maximum number of faces with the highest confidence in the match.
 | collectionId      | String     | ID of the collection to search.
@@ -210,11 +221,10 @@ For a given input image, first detects the largest face in the image, and then s
 |-------------------|------------|----------
 | apiKey            | credentials| API key obtained from Amazon
 | apiSecret         | credentials| API secret obtained from Amazon
-| region            | String     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
+| region            | Select     | AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)
 | faceMatchThreshold| String     | Specifies the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%.
 | maxFaces          | Number     | Maximum number of faces to return. The operation returns the maximum number of faces with the highest confidence in the match.
 | collectionId      | String     | ID of the collection to search.
 | imageS3Bucket     | String     | Name of the S3 bucket.
 | imageS3Name       | String     | S3 object key name.
 | imageS3Version    | String     | If the bucket is versioning enabled, you can specify the object version.
-

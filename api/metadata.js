@@ -30,7 +30,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -52,7 +53,7 @@ module.exports.do = function(req, res){
                     info: "File or url",
                     required: true
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"compareFacesInS3Images",
@@ -72,7 +73,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: true
                 },
@@ -118,7 +120,7 @@ module.exports.do = function(req, res){
                     info: "If the bucket is versioning enabled, you can specify the object version.",
                     required: false
                 },
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"createCollection",
@@ -138,7 +140,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -148,7 +151,7 @@ module.exports.do = function(req, res){
                     info: "ID for the collection that you are creating.",
                     required: true
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"deleteCollection",
@@ -168,7 +171,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -178,7 +182,7 @@ module.exports.do = function(req, res){
                     info: "ID for the collection that you are deleting.",
                     required: false
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"deleteFacesFromCollection",
@@ -198,7 +202,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -210,11 +215,16 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "faceIds",
-                    type: "String",
+                    type: "List",
+                    structure:{
+                      name: "faceId",
+                      type: "String",
+                      info: "Single face Id"
+                    }
                     info: "An array of face IDs to delete.",
                     required: true
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"detectFacesInImage",
@@ -234,7 +244,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -250,7 +261,7 @@ module.exports.do = function(req, res){
                     info: "File or url",
                     required: true
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"detectFacesInS3Image",
@@ -270,7 +281,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: true
                 },
@@ -298,7 +310,7 @@ module.exports.do = function(req, res){
                     info: "If the bucket is versioning enabled, you can specify the object version.",
                     required: false
                 },
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"detectLabelsInImage",
@@ -318,7 +330,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -340,7 +353,7 @@ module.exports.do = function(req, res){
                     info: "File or url",
                     required: true
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"detectLabelsInS3Image",
@@ -360,7 +373,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: true
                 },
@@ -394,7 +408,7 @@ module.exports.do = function(req, res){
                     info: "If the bucket is versioning enabled, you can specify the object version.",
                     required: false
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"indexFacesIntoCollection",
@@ -414,7 +428,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -442,7 +457,7 @@ module.exports.do = function(req, res){
                     info: "File or url",
                     required: true
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"indexS3FacesIntoCollection",
@@ -462,7 +477,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: true
                 },
@@ -502,7 +518,7 @@ module.exports.do = function(req, res){
                     info: "If the bucket is versioning enabled, you can specify the object version.",
                     required: false
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"getCollections",
@@ -522,7 +538,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -538,7 +555,7 @@ module.exports.do = function(req, res){
                     info: "Pagination token from the previous response.",
                     required: false
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"getFacesInCollection",
@@ -558,7 +575,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -580,7 +598,7 @@ module.exports.do = function(req, res){
                     info: "If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of faces.",
                     required: false
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"searchFaces",
@@ -600,7 +618,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -628,7 +647,7 @@ module.exports.do = function(req, res){
                     info: "Maximum number of faces to return. The operation returns the maximum number of faces with the highest confidence in the match.",
                     required: false
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"searchFacesByImage",
@@ -648,7 +667,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: false
                 },
@@ -676,7 +696,7 @@ module.exports.do = function(req, res){
                     info: "File or url",
                     required: true
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }, {
             "name":"searchFacesByS3Image",
@@ -696,7 +716,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "region",
-                    type: "String",
+                    type: "Select",
+                    options: ["us-east-1", "us-west-2"],
                     info: "AWS Region. Supported values: `us-east-1` (N. Virginia) and `us-west-2` (Oregon)",
                     required: true
                 },
@@ -736,7 +757,7 @@ module.exports.do = function(req, res){
                     info: "If the bucket is versioning enabled, you can specify the object version.",
                     required: false
                 }
-            ], 
+            ],
             'callbacks':[{'name':'error','info':'Error'}, {'name':'success','info':'Success'}]
         }]
     })
