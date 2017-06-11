@@ -220,7 +220,7 @@ module.exports.do = function(req, res){
                       name: "faceId",
                       type: "String",
                       info: "Single face Id"
-                    }
+                    },
                     info: "An array of face IDs to delete.",
                     required: true
                 }
